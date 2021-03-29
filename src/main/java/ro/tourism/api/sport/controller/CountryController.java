@@ -1,5 +1,6 @@
 package ro.tourism.api.sport.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.tourism.api.sport.entity.Country;
 import ro.tourism.api.sport.model.CountryModel;
@@ -24,7 +25,7 @@ public class CountryController {
     }
 
     @PostMapping("/add")
-    public CountryModel addCountry(@RequestBody CountryModel newCountry){
+    public ResponseEntity<String> addCountry(@RequestBody CountryModel newCountry){
         return countryService.addCountry(newCountry);
     }
 
@@ -34,8 +35,8 @@ public class CountryController {
     }
 
     @DeleteMapping ("/delete/{id}")
-    public void deleteCountry(@PathVariable("id") final Long id) {
-        countryService.deleteCountry(id);
+    public ResponseEntity deleteCountry(@PathVariable("id") final Long id) {
+       return countryService.deleteCountry(id);
     }
 
 }

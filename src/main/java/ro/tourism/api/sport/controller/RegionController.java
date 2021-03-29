@@ -24,7 +24,7 @@ public class RegionController {
     }
 
     @PostMapping("/add")
-    public RegionModel addRegion(@RequestBody RegionModel newRegion) {
+    public ResponseEntity<String> addRegion(@RequestBody RegionModel newRegion) {
         return regionService.addRegion(newRegion);
     }
 

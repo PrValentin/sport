@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface LocalitySportRepository extends JpaRepository<LocalitySport, Long> {
 
-    void deleteByLocalityIdIn(final List<Long> localityIds);
+    void deleteByLocalityIdIn(final List<Long> localitiesIds);
+    void deleteByLocalityId(final Long id);
 }

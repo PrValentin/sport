@@ -36,12 +36,21 @@ public class RegionService {
         return regionRepository.findByOrderById();
     }
 
-    public RegionModel addRegion(RegionModel newRegion) {
+    public ResponseEntity<String> addRegion(RegionModel newRegion) {
         Region region = new Region();
+        final Optional<Country> optionalCountry = countryRepository.findById(newRegion.getIdCountry());
+        final Optional<Region> optionalRegion = regionRepository.findByName(newRegion.getName());
+        if (optionalRegion.isPresent()) {
+            return new ResponseEntity<>("This name already exist in database", HttpStatus.BAD_REQUEST);
+        }
+
+        if (optionalCountry.isEmpty()) {
+            return new ResponseEntity<>("Id country was not found in database", HttpStatus.BAD_REQUEST);
+        }
         region.setCountry(countryRepository.getOne(newRegion.getIdCountry()));
         region.setName(newRegion.getName());
         regionRepository.save(region);
-        return newRegion;
+        return new ResponseEntity<>("OK save newRegion", HttpStatus.OK);
     }
 
     public ResponseEntity<String> updateRegion(RegionModel regionModel) {
@@ -54,7 +63,7 @@ public class RegionService {
         region.setName(regionModel.getName());
         regionRepository.save(region);
 
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>("OK update Region", HttpStatus.OK);
     }
 
     public ResponseEntity<String> deleteRegion(Long id) {
@@ -66,7 +75,7 @@ public class RegionService {
         List<Locality> localities = localityRepository.findByRegionId(id);
 
         List<Long> localityIds = new ArrayList<>();
-        for(Locality locality : localities) {
+        for (Locality locality : localities) {
             localityIds.add(locality.getId());
         }
 
