@@ -29,12 +29,12 @@ public class CountryController {
     }
 
     @PostMapping("/update")
-    public CountryModel update(CountryModel countryModel) {
+    public CountryModel updateCountry(@RequestBody CountryModel countryModel) {
         return countryService.updateCountry(countryModel);
     }
 
     @DeleteMapping ("/delete/{id}")
-    public void delete(@PathVariable("id") final Long id) {
+    public void deleteCountry(@PathVariable("id") final Long id) {
         countryService.deleteCountry(id);
     }
 
