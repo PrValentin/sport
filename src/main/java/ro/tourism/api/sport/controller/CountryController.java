@@ -30,7 +30,7 @@ public class CountryController {
     }
 
     @PostMapping("/update")
-    public CountryModel updateCountry(@RequestBody CountryModel countryModel) {
+    public ResponseEntity<String> updateCountry(@RequestBody CountryModel countryModel) {
         return countryService.updateCountry(countryModel);
     }
 

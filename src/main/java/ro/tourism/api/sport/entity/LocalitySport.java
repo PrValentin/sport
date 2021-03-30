@@ -1,6 +1,7 @@
 package ro.tourism.api.sport.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,10 +23,10 @@ public class LocalitySport {
     private Locality locality;
 
     @Column(name="start_season")
-    private LocalDateTime startSeason;
+    private LocalDate startSeason;
 
     @Column(name="end_season")
-    private LocalDateTime endSeason;
+    private LocalDate endSeason;
 
     @Column(name="cost_day")
     private Long costDay;
@@ -54,19 +55,19 @@ public class LocalitySport {
         this.locality = locality;
     }
 
-    public LocalDateTime getStartSeason() {
+    public LocalDate getStartSeason() {
         return startSeason;
     }
 
-    public void setStartSeason(LocalDateTime startSeason) {
+    public void setStartSeason(LocalDate startSeason) {
         this.startSeason = startSeason;
     }
 
-    public LocalDateTime getEndSeason() {
+    public LocalDate getEndSeason() {
         return endSeason;
     }
 
-    public void setEndSeason(LocalDateTime endSeason) {
+    public void setEndSeason(LocalDate endSeason) {
         this.endSeason = endSeason;
     }
 

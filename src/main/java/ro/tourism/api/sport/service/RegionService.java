@@ -39,7 +39,8 @@ public class RegionService {
     public ResponseEntity<String> addRegion(RegionModel newRegion) {
         Region region = new Region();
         final Optional<Country> optionalCountry = countryRepository.findById(newRegion.getIdCountry());
-        final Optional<Region> optionalRegion = regionRepository.findByName(newRegion.getName());
+        final Optional<Region> optionalRegion = regionRepository.findByName(newRegion.getName().toLowerCase());
+
         if (optionalRegion.isPresent()) {
             return new ResponseEntity<>("This name already exist in database", HttpStatus.BAD_REQUEST);
         }
@@ -47,6 +48,7 @@ public class RegionService {
         if (optionalCountry.isEmpty()) {
             return new ResponseEntity<>("Id country was not found in database", HttpStatus.BAD_REQUEST);
         }
+
         region.setCountry(countryRepository.getOne(newRegion.getIdCountry()));
         region.setName(newRegion.getName());
         regionRepository.save(region);
@@ -54,14 +56,24 @@ public class RegionService {
     }
 
     public ResponseEntity<String> updateRegion(RegionModel regionModel) {
-        Region region = regionRepository.getOne(regionModel.getId());
+        final Optional<Region> optionalRegion = regionRepository.findById(regionModel.getId());
+        if (optionalRegion.isEmpty()) {
+            return new ResponseEntity<>("Id Region was not found in database", HttpStatus.BAD_REQUEST);
+        }
+
+        final Optional<Region> optionalRegion1 = regionRepository.findByName(regionModel.getName());
+        if (optionalRegion1.isPresent() && optionalRegion1.get().getId() != regionModel.getId()) {
+            return new ResponseEntity<>("This Region already exist in database", HttpStatus.BAD_REQUEST);
+        }
+
         final Optional<Country> optionalCountry = countryRepository.findById(regionModel.getIdCountry());
         if (optionalCountry.isEmpty()) {
             return new ResponseEntity<>("Id country was not found in database", HttpStatus.BAD_REQUEST);
         }
-        region.setCountry(optionalCountry.get());
-        region.setName(regionModel.getName());
-        regionRepository.save(region);
+
+        optionalRegion.get().setCountry(optionalCountry.get());
+        optionalRegion.get().setName(optionalRegion1.get().getName());
+        regionRepository.save(optionalRegion.get());
 
         return new ResponseEntity<>("OK update Region", HttpStatus.OK);
     }

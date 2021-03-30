@@ -9,8 +9,12 @@ import java.util.Optional;
 public interface RegionRepository extends JpaRepository<Region, Long> {
 
     List<Region> findByOrderById();
+
     Optional<Region> findById(final Long id);
+
     Optional<Region> findByName(final String name);
+
     List<Region> findByCountryId(final Long id);
+
     void deleteByCountryId(final Long countryId);
 }

@@ -9,4 +9,5 @@ public interface LocalitySportRepository extends JpaRepository<LocalitySport, Lo
 
     void deleteByLocalityIdIn(final List<Long> localitiesIds);
     void deleteByLocalityId(final Long id);
+    void deleteBySportId(final Long id);
 }

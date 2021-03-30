@@ -3,6 +3,7 @@ package ro.tourism.api.sport.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ro.tourism.api.sport.entity.Country;
 import ro.tourism.api.sport.entity.Locality;
 import ro.tourism.api.sport.entity.Region;
 import ro.tourism.api.sport.model.LocalityModel;
@@ -34,7 +35,7 @@ public class LocalityService {
 
     public ResponseEntity<String> addLocality(LocalityModel localityModel) {
         Locality locality = new Locality();
-        Optional<Locality> optionalLocality = localityRepository.findByName(localityModel.getName());
+        Optional<Locality> optionalLocality = localityRepository.findByNameIgnoreCase(localityModel.getName());
         if (optionalLocality.isPresent()){
             return new ResponseEntity<>("This name already exist in database", HttpStatus.BAD_REQUEST);
         }
@@ -48,6 +49,26 @@ public class LocalityService {
         return new ResponseEntity<>("Add locality ok",HttpStatus.OK);
     }
 
+    public ResponseEntity<String> updateLocality(LocalityModel localityModel) {
+        Optional<Locality> optionalLocality = localityRepository.findById(localityModel.getId());
+        if (optionalLocality.isEmpty()) {
+            return new ResponseEntity<>("Id Locality was not found in database", HttpStatus.BAD_REQUEST);
+        }
+        Optional<Locality> optionalLocality1 = localityRepository.findByNameIgnoreCase(localityModel.getName());
+        if (optionalLocality1.isPresent() && optionalLocality1.get().getId() != localityModel.getId()) {
+            return new ResponseEntity<>("This name already exist in database", HttpStatus.BAD_REQUEST);
+        }
+        Optional<Region> optionalRegion = regionRepository.findById(localityModel.getIdRegion());
+        if (optionalRegion.isEmpty()) {
+            return new ResponseEntity<>("This idRegion was not found in database", HttpStatus.BAD_REQUEST);
+        }
+        optionalLocality.get().setRegion(optionalRegion.get());
+        optionalLocality.get().setName(localityModel.getName());
+        localityRepository.save(optionalLocality.get());
+
+        return new ResponseEntity<>("OK update Region", HttpStatus.OK);
+    }
+
     public ResponseEntity<String> deleteLocality(Long id) {
         Optional<Locality> optionalLocality = localityRepository.findById(id);
         if (optionalLocality.isEmpty()) {
@@ -57,4 +78,6 @@ public class LocalityService {
         localityRepository.delete(optionalLocality.get());
         return new ResponseEntity<>("Delete locality ok", HttpStatus.OK);
     }
+
+
 }

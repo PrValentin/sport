@@ -38,27 +38,37 @@ public class CountryService {
     }
 
     public ResponseEntity<String> addCountry(CountryModel countryAdd) {
-        Optional<Country> optionalCountry = countryRepository.findByName(countryAdd.getName());
-        if (optionalCountry.isPresent()) {
+
+        Optional<Country> optionalCountry = countryRepository.findByNameIgnoreCase(countryAdd.getName());
+        if (optionalCountry.isPresent() && optionalCountry.get().getId() != countryAdd.getId()) {
             return new ResponseEntity<>("This name already exist in database", HttpStatus.BAD_REQUEST);
         }
         Country country = new Country();
         country.setName(countryAdd.getName());
         countryRepository.save(country);
+
         return new ResponseEntity<>("Add newCountry ok", HttpStatus.OK);
     }
 
-    public Country getCountry(final Long countryId) {
-        return countryRepository.getOne(countryId);
+    public ResponseEntity<String> updateCountry(CountryModel countryModel) {
+
+        Optional<Country> optionalCountry = countryRepository.findById(countryModel.getId());
+        if (optionalCountry.isEmpty()) {
+            return new ResponseEntity<>("Id country was not found in database", HttpStatus.BAD_REQUEST);
+        }
+        Optional<Country> optionalCountry1 = countryRepository.findByNameIgnoreCase(countryModel.getName());
+        if (optionalCountry1.isPresent() && optionalCountry1.get().getId() != countryModel.getId()) {
+            return new ResponseEntity<>("This name already exist in database", HttpStatus.BAD_REQUEST);
+        }
+
+        optionalCountry.get().setName(countryModel.getName());
+        countryRepository.save(optionalCountry.get());
+
+        return new ResponseEntity<>("Update Country ok", HttpStatus.OK);
     }
 
-    public CountryModel updateCountry(CountryModel countryModel) {
-        Country country = countryRepository.getOne(countryModel.getId());
-        country.setName(countryModel.getName());
-        countryRepository.save(country);
-        return countryModel;
-    }
     public ResponseEntity<String> deleteCountry(Long id){
+
         Optional<Country> optionalCountry = countryRepository.findById(id);
         if (optionalCountry.isEmpty()) {
             return new ResponseEntity<>("Id country was not found in database", HttpStatus.BAD_REQUEST);
