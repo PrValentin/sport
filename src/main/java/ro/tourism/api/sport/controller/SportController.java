@@ -3,7 +3,6 @@ package ro.tourism.api.sport.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.tourism.api.sport.entity.Sport;
-import ro.tourism.api.sport.model.CountryModel;
 import ro.tourism.api.sport.model.SportModel;
 import ro.tourism.api.sport.service.SportService;
 

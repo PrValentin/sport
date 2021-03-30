@@ -3,7 +3,6 @@ package ro.tourism.api.sport.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ro.tourism.api.sport.entity.Country;
 import ro.tourism.api.sport.entity.Locality;
 import ro.tourism.api.sport.entity.Region;
 import ro.tourism.api.sport.model.LocalityModel;

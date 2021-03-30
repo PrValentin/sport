@@ -10,8 +10,8 @@ public interface SportRepository extends JpaRepository<Sport, Long> {
 
     List<Sport> findByOrderById();
 
-    Optional<Sport> findById(Long  id);
+    Optional<Sport> findById(final Long id);
 
-    Optional<Sport> findByNameIgnoreCase(String name);
+    Optional<Sport> findByNameIgnoreCase(final String name);
 
 }

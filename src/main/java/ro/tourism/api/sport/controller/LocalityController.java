@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.tourism.api.sport.entity.Locality;
 import ro.tourism.api.sport.model.LocalityModel;
-import ro.tourism.api.sport.model.RegionModel;
 import ro.tourism.api.sport.service.LocalityService;
 
 import java.util.List;

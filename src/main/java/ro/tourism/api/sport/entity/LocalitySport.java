@@ -1,8 +1,10 @@
 package ro.tourism.api.sport.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="locality_sport")
@@ -23,9 +25,13 @@ public class LocalitySport {
     private Locality locality;
 
     @Column(name="start_season")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "dd-MM-YYYY")
     private LocalDate startSeason;
 
     @Column(name="end_season")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "dd-MM-YYYY")
     private LocalDate endSeason;
 
     @Column(name="cost_day")
