@@ -6,7 +6,9 @@ import java.time.LocalDate;
 
 public class LocalitySportModel {
     Long id;
+
     Long idSport;
+
     Long idLocality;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -14,7 +16,8 @@ public class LocalitySportModel {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate endSeason;
-    Long costDay;
+
+    Double costDay;
 
     public Long getId() {
         return id;
@@ -56,11 +59,11 @@ public class LocalitySportModel {
         this.endSeason = endSeason;
     }
 
-    public Long getCostDay() {
+    public Double getCostDay() {
         return costDay;
     }
 
-    public void setCostDay(Long costDay) {
+    public void setCostDay(Double costDay) {
         this.costDay = costDay;
     }
 

@@ -8,7 +8,6 @@ import ro.tourism.api.sport.service.LocalityService;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/locality")
 public class LocalityController {

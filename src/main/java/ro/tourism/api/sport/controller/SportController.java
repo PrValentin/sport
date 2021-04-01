@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/sport")
 public class SportController {
+
     private SportService sportService;
 
     public SportController(SportService sportService) {

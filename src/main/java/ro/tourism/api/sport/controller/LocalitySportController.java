@@ -11,11 +11,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/localitySport")
 public class LocalitySportController {
+
     LocalitySportService localitySportService;
 
     public LocalitySportController(LocalitySportService localitySportService){
         this.localitySportService = localitySportService;
     }
+
     @GetMapping("/list")
     public List<LocalitySport> getLocalitiesSport() {
         return localitySportService.getAllLocalitiesSport();
@@ -35,4 +37,6 @@ public class LocalitySportController {
     public ResponseEntity<String> deleteLocalitiesSport(@PathVariable("id") final Long id) {
         return localitySportService.deleteLocalitiesSport(id);
     }
+
+
 }

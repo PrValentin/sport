@@ -35,7 +35,7 @@ public class LocalitySport {
     private LocalDate endSeason;
 
     @Column(name="cost_day")
-    private Long costDay;
+    private Double costDay;
 
     public Long getId() {
         return id;
@@ -77,11 +77,11 @@ public class LocalitySport {
         this.endSeason = endSeason;
     }
 
-    public Long getCostDay() {
+    public Double getCostDay() {
         return costDay;
     }
 
-    public void setCostDay(Long costDay) {
+    public void setCostDay(Double costDay) {
         this.costDay = costDay;
     }
 
