@@ -15,8 +15,6 @@ public class SportLocalityFilterBuilder {
 
     private final SportsFilterModel filter;
 
-    private static final String WRONG_DESTINATION_RESOLVED = "wrongDestinationResolved";
-
     public SportLocalityFilterBuilder(SportsFilterModel filter) {
         this.filter = filter;
     }
