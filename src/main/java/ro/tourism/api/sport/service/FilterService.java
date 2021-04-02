@@ -1,5 +1,6 @@
 package ro.tourism.api.sport.service;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ro.tourism.api.sport.entity.LocalitySport;
@@ -27,7 +28,7 @@ public class FilterService {
 
         LocalitySportsCostsListModel localitySportsCostsListModel = new LocalitySportsCostsListModel();
 
-        List<LocalitySport> localitySportsFiltered = localitySportRepository.findAll(specification);
+        List<LocalitySport> localitySportsFiltered = localitySportRepository.findAll(specification, Sort.by("costDay"));
 
         Map<Long, List<LocalitySport>> groupByLocality = getMapOfLocalityIdKeyLocalitySportListValue(localitySportsFiltered);
 

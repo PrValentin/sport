@@ -25,10 +25,6 @@ public class SportLocalityFilterBuilder {
 
         Specification<LocalitySport> localitySportSpecification = null;
 
-        /*if(!StringUtils.isEmpty(filter.getIdSports())) {
-            localitySportSpecification = Specification.where(localitySportSpecification.and((filter.getIdSports())));
-        }*/
-
         if (filter.getStartSeason() != null) {
             localitySportSpecification =
                     Specification.where(localitySportSpecification).and(startDateIsBefore(filter.getStartSeason()));
