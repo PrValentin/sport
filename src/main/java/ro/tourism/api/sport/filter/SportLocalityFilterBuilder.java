@@ -45,7 +45,7 @@ public class SportLocalityFilterBuilder {
         return new Specification<LocalitySport>() {
             @Override
             public Predicate toPredicate(Root<LocalitySport> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.lessThan(root.get("startSeason").as(LocalDate.class), startDate);
+                return criteriaBuilder.lessThanOrEqualTo(root.get("startSeason").as(LocalDate.class), startDate);
             }
         };
     }
@@ -54,7 +54,7 @@ public class SportLocalityFilterBuilder {
         return new Specification<LocalitySport>() {
             @Override
             public Predicate toPredicate(Root<LocalitySport> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.greaterThan(root.get("endSeason").as(LocalDate.class), endDate);
+                return criteriaBuilder.greaterThanOrEqualTo(root.get("endSeason").as(LocalDate.class), endDate);
             }
         };
     }
